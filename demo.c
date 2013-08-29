@@ -1,9 +1,3 @@
-/*
-   SDL Video Demo
-   demonstrates SDL's video working by moving dots around a screen
-   written by Sayuri L. Kitsune (2012)
-   */
-
 /* Defines */
 #define NUM_DOTS 1024
 
@@ -45,8 +39,8 @@ void demo_init()
     demo_dots[i].green = rand()%255;
     demo_dots[i].vx = demo_roll()*16.0f-8.0f;
     demo_dots[i].vy = demo_roll()*16.0f-8.0f;
-    demo_dots[i].x = demo_roll()*320.0f;
-    demo_dots[i].y = demo_roll()*240.0f;
+    demo_dots[i].x = demo_roll()*1366.0f;
+    demo_dots[i].y = demo_roll()*768.0f;
   }
 }
 
@@ -60,14 +54,14 @@ void demo_handle()
     demo_dots[i].x += demo_dots[i].vx*demo_time_step;
     demo_dots[i].y += demo_dots[i].vy*demo_time_step;
     /* Hit walls? */
-    if(demo_dots[i].x < 0.0f || demo_dots[i].x >= 320.0f)
+    if(demo_dots[i].x < 0.0f || demo_dots[i].x >= 1366.0f)
     {
       /* Undo move (demo_time_step is still the same value it was before and is valid for the current frame) */
       demo_dots[i].x -= demo_dots[i].vx*demo_time_step;
       /* Reverse */
       demo_dots[i].vx = -demo_dots[i].vx;
     }
-    if(demo_dots[i].y < 0.0f || demo_dots[i].y >= 240.0f)
+    if(demo_dots[i].y < 0.0f || demo_dots[i].y >= 768.0f)
     {
       /* Undo move (demo_time_step is still the same value it was before and is valid for the current frame) */
       demo_dots[i].y -= demo_dots[i].vy*demo_time_step;
@@ -139,7 +133,7 @@ int main(int argn,char **argv)
   if(SDL_Init(SDL_INIT_VIDEO) != 0)
     fprintf(stderr,"Could not initialize SDL: %s\n",SDL_GetError());
   /* Open main window */
-  demo_screen = SDL_SetVideoMode(640,480,0,SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
+  demo_screen = SDL_SetVideoMode(1366,768,0,SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
   if(!demo_screen)
     fprintf(stderr,"Could not set video mode: %s\n",SDL_GetError());
   /* Initialize game */
@@ -161,7 +155,7 @@ int main(int argn,char **argv)
     /* Handle game */
     demo_handle();
     /* Clear screen */
-    SDL_FillRect(demo_screen,NULL,SDL_MapRGBA(demo_screen->format,0,0,255,255));
+    SDL_FillRect(demo_screen,NULL,SDL_MapRGBA(demo_screen->format,0,0,0,255));
     /* Draw game */
     demo_draw();
     /* Show screen */
