@@ -5,6 +5,7 @@
 #include <time.h>
 #include <SDL.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /* Types */
 typedef struct
@@ -87,7 +88,8 @@ void demo_draw()
     x = (int)demo_dots[i].x;
     y = (int)demo_dots[i].y;
     /* Set pixel */
-    pixel[x+y*rank] = SDL_MapRGBA(demo_screen->format,demo_dots[i].red,demo_dots[i].green,0,255);
+    pixel[x+y*rank] = SDL_MapRGBA(demo_screen->format,255,255,255,255);
+    //printf("%d\n", x);
   }
   /* Unlock surface */
   SDL_UnlockSurface(demo_screen);
